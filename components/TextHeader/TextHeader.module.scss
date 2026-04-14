@@ -1,0 +1,64 @@
+.TextHeader {
+	padding: var(--module-spacing) 48px;
+
+	@media (max-width: 1024px) {
+		padding: 48px 40px 36px;
+	}
+
+	@media (max-width: 640px) {
+		padding: 40px 24px 28px;
+	}
+
+	&Wrapper {
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
+		align-items: center;
+		text-align: center;
+	}
+}
+
+.muted {
+	color: var(--mid-grey);
+}
+
+.ActionWrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1.5rem;
+
+	@media (max-width: 768px) {
+		align-items: flex-start;
+	}
+
+	.content {
+		font-size: clamp(1rem, 0.8214rem + 0.5714vw, 1.25rem);
+		letter-spacing: -0.025em;
+		line-height: 1.6;
+		color: var(--text-color);
+		max-width: clamp(350px, 228.57px + 24.29vw, 520px);
+	}
+
+	.cta {
+		display: inline-flex;
+		align-items: center;
+		height: 40px;
+		padding: 0 1rem;
+		border-radius: var(--button-border-radius);
+		background: var(--brand-caribbean-300);
+		color: var(--text-color);
+		font-size: var(--button-font-size, 1rem);
+		font-weight: 700;
+		text-decoration: none;
+		letter-spacing: 0.01em;
+		width: 100%;
+		max-width: fit-content;
+		min-height: var(--button-height);
+		transition: background 0.3s ease;
+
+		&:hover {
+			background: var(--brand-caribbean-200);
+		}
+	}
+}

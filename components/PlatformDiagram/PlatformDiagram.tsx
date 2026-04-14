@@ -2,92 +2,10 @@
 
 import { useState, useRef, useCallback, useEffect } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
-import { PortableText, type PortableTextComponents } from '@portabletext/react';
 import styles from './PlatformDiagram.module.scss';
-
-interface UseCase {
-	id: string;
-	label: string;
-	desc: string;
-	chips: string[];
-	dot: { x: number; y: number };
-}
-
-const USE_CASES: UseCase[] = [
-	{
-		id: 'runway',
-		label: 'Extend your runway',
-		desc: 'Earn yield on idle cash and keep more of your funding working between raises.',
-		chips: ['Checking Accounts', 'Savings Accounts', 'Treasury Accounts'],
-		dot: { x: 23, y: 80 }
-	},
-	{
-		id: 'spend',
-		label: 'Control spend early',
-		desc: 'Set limits and approval workflows before expenses scale with your growing team.',
-		chips: ['Rho Cards', 'Expense Management', 'Bill Pay'],
-		dot: { x: 38, y: 62 }
-	},
-	{
-		id: 'scale',
-		label: 'Scale finance operations',
-		desc: 'Automate reconciliation and transaction syncing so finance keeps pace with company growth.',
-		chips: ['Accounting Integrations', 'Bill Pay', 'Expense Management'],
-		dot: { x: 52, y: 28 }
-	},
-	{
-		id: 'standardize',
-		label: 'Standardize company spend',
-		desc: 'Create consistent workflows across teams while maintaining centralized oversight.',
-		chips: ['Rho Cards', 'Expense Management', 'Approval Workflows'],
-		dot: { x: 65, y: 57 }
-	},
-	{
-		id: 'consolidate',
-		label: 'Consolidate your finance stack',
-		desc: 'Bring banking, cards, bill pay, and accounting workflows together in one platform.',
-		chips: [
-			'Checking Accounts',
-			'Rho Cards',
-			'Bill Pay',
-			'Accounting Integrations'
-		],
-		dot: { x: 77, y: 76 }
-	}
-];
-
-const HEADING_BLOCK = [
-	{
-		_type: 'block',
-		_key: 'heading',
-		style: 'normal',
-		children: [
-			{ _type: 'span', _key: 'a', text: 'A ', marks: ['muted'] },
-			{ _type: 'span', _key: 'b', text: 'single platform ', marks: [] },
-			{ _type: 'span', _key: 'c', text: 'for', marks: ['muted'] },
-			{ _type: 'span', _key: 'br', text: '\n', marks: [] },
-			{
-				_type: 'span',
-				_key: 'd',
-				text: 'all your banking needs.',
-				marks: ['muted']
-			}
-		],
-		markDefs: []
-	}
-];
-
-const headingComponents: PortableTextComponents = {
-	block: {
-		normal: ({ children }) => <h2 className={styles.heading}>{children}</h2>
-	},
-	marks: {
-		muted: ({ children }) => (
-			<span className={styles.headingMuted}>{children}</span>
-		)
-	}
-};
+import PulsePoint from '@/components/PulsePoint/PulsePoint';
+import TextHeader from '../TextHeader/TextHeader';
+import { USE_CASES } from '@/data/useCases';
 
 const SCALE = 1.18;
 
@@ -96,6 +14,7 @@ export default function PlatformDiagram() {
 	const [fading, setFading] = useState(false);
 
 	const wrapRef = useRef<HTMLDivElement>(null);
+	const pulseWrapRef = useRef<HTMLDivElement>(null);
 	const areaRef = useRef<HTMLDivElement>(null);
 
 	const buildTransform = useCallback(
@@ -116,13 +35,9 @@ export default function PlatformDiagram() {
 				((index % USE_CASES.length) + USE_CASES.length) % USE_CASES.length;
 			const uc = USE_CASES[next];
 
-			if (wrapRef.current) {
-				wrapRef.current.style.transform = buildTransform(
-					uc.dot.x,
-					uc.dot.y,
-					SCALE
-				);
-			}
+			const t = buildTransform(uc.dot.x, uc.dot.y, SCALE);
+			if (wrapRef.current) wrapRef.current.style.transform = t;
+			if (pulseWrapRef.current) pulseWrapRef.current.style.transform = t;
 
 			if (instant) {
 				setActive(next);
@@ -145,23 +60,10 @@ export default function PlatformDiagram() {
 	const current = USE_CASES[active];
 
 	return (
-		<section className={styles.root}>
-			<header className={styles.TextHeader}>
-				<div className={styles.TextHeaderWrapper}>
-					<PortableText value={HEADING_BLOCK} components={headingComponents} />
-					<div className={styles.ActionWrapper}>
-						<p className={styles.content}>
-							Once you've opened your business banking accounts, get set up with
-							the rest of the essentials.
-						</p>
-						<Link href='/request-a-demo' className={styles.cta}>
-							Get Started
-						</Link>
-					</div>
-				</div>
-			</header>
-			<div className={styles.mountainArea} ref={areaRef}>
-				<div className={styles.wrap} ref={wrapRef}>
+		<section className={styles.PlatformDiagram}>
+			<TextHeader />
+			<div className={styles.mountain} ref={areaRef}>
+				<div className={styles.mountainWrapper} ref={wrapRef}>
 					<Image
 						src='/images/mountain.png'
 						alt='Mountain'
@@ -169,26 +71,21 @@ export default function PlatformDiagram() {
 						className={styles.mountainImg}
 						priority
 					/>
-					{USE_CASES.map((uc, i) => (
-						<button
-							key={uc.id}
-							className={[
-								styles.pulsePoint,
-								i === active
-									? styles.pulsePointActive
-									: styles.pulsePointInactive
-							].join(' ')}
-							style={{ left: `${uc.dot.x}%`, top: `${uc.dot.y}%` }}
-							onClick={() => switchTo(i)}
-							aria-label={`View ${uc.label}`}
-						>
-							<span className={styles.ring} />
-							<span className={`${styles.ring} ${styles.ring2}`} />
-							<span className={styles.dot} />
-						</button>
-					))}
 				</div>
 				<div className={styles.fadeBottom} aria-hidden='true' />
+				<div className={styles.pulseWrapper} ref={pulseWrapRef}>
+					{USE_CASES.map((uc, i) => (
+						<PulsePoint
+							key={uc.id}
+							id={uc.id}
+							x={uc.dot.x}
+							y={uc.dot.y}
+							active={i === active}
+							onClick={() => switchTo(i)}
+							label={`View ${uc.label}`}
+						/>
+					))}
+				</div>
 			</div>
 			<div className={styles.contentArea}>
 				<div className={styles.navRow}>

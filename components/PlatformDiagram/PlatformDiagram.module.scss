@@ -1,76 +1,10 @@
-.root {
+.PlatformDiagram {
 	max-width: 1440px;
 	margin: 0 auto;
 	background: #fff;
 }
 
-.TextHeader {
-	padding: var(--module-spacing) 48px;
-	// padding: 48px;
-
-	@media (max-width: 1024px) {
-		padding: 48px 40px 36px;
-	}
-
-	@media (max-width: 640px) {
-		padding: 40px 24px 28px;
-	}
-
-	&Wrapper {
-		display: flex;
-		flex-direction: column;
-		gap: 1.5rem;
-		align-items: center;
-		text-align: center;
-	}
-}
-
-.headingMuted {
-	color: var(--mid-grey);
-}
-
-.ActionWrapper {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	gap: 1.5rem;
-
-	@media (max-width: 768px) {
-		align-items: flex-start;
-	}
-
-	.content {
-		font-size: clamp(1rem, 0.8214rem + 0.5714vw, 1.25rem);
-		letter-spacing: -0.025em;
-		line-height: 1.6;
-		color: var(--text-color);
-		max-width: clamp(350px, 228.57px + 24.29vw, 520px);
-	}
-
-	.cta {
-		display: inline-flex;
-		align-items: center;
-		height: 40px;
-		padding: 0 1rem;
-		border-radius: var(--button-border-radius);
-		background: var(--brand-caribbean-300);
-		color: var(--text-color);
-		font-size: var(--button-font-size, 1rem);
-		font-weight: 700;
-		text-decoration: none;
-		letter-spacing: 0.01em;
-		width: 100%;
-		max-width: fit-content;
-		min-height: var(--button-height);
-		transition: background 0.3s ease;
-
-		&:hover {
-			background: var(--brand-caribbean-200);
-		}
-	}
-}
-
-.mountainArea {
+.mountain {
 	position: relative;
 	width: 100%;
 	height: 520px;
@@ -83,27 +17,40 @@
 	@media (max-width: 480px) {
 		height: 280px;
 	}
+
+	&Wrapper {
+		position: absolute;
+		inset: 0;
+		overflow: visible;
+		transform-origin: 0 0;
+		transform: translate(0px, 0px) scale(1);
+		transition: transform 0.75s cubic-bezier(0.4, 0, 0.2, 1);
+		will-change: transform;
+		z-index: 1;
+	}
+
+	&Img {
+		position: absolute !important;
+		width: 110% !important;
+		left: -5% !important;
+		bottom: -20px !important;
+		top: auto !important;
+		height: 108% !important;
+		object-fit: contain !important;
+		object-position: center bottom !important;
+	}
 }
 
-.wrap {
+.pulseWrapper {
 	position: absolute;
 	inset: 0;
-	overflow: visible; // scene provides the clip
-	transform-origin: 0 0; // fixed forever, never changes
+	overflow: visible;
+	transform-origin: 0 0;
 	transform: translate(0px, 0px) scale(1);
 	transition: transform 0.75s cubic-bezier(0.4, 0, 0.2, 1);
 	will-change: transform;
-}
-
-.mountainImg {
-	position: absolute !important;
-	width: 110% !important;
-	left: -5% !important;
-	bottom: -20px !important;
-	top: auto !important;
-	height: 108% !important;
-	object-fit: contain !important;
-	object-position: center bottom !important;
+	z-index: 11;
+	pointer-events: none;
 }
 
 .fadeBottom {
@@ -117,77 +64,6 @@
 	z-index: 10;
 }
 
-.pulsePoint {
-	position: absolute;
-	transform: translate(-50%, -50%);
-	background: none;
-	border: none;
-	padding: 0;
-	cursor: pointer;
-	pointer-events: all;
-	overflow: visible;
-}
-
-.ring {
-	position: absolute;
-	inset: -9px;
-	border-radius: 50%;
-	border: 1.5px solid #00c9a7;
-	opacity: 0;
-	animation: ping 2.4s ease-out infinite;
-	pointer-events: none;
-}
-
-.ring2 {
-	animation-delay: 0.85s;
-}
-
-.dot {
-	display: block;
-	width: 13px;
-	height: 13px;
-	border-radius: 50%;
-	background: #00c9a7;
-	border: 2.5px solid #fff;
-	box-shadow: 0 0 0 2px #00c9a7;
-	transition:
-		transform 0.2s ease,
-		box-shadow 0.2s ease,
-		background 0.2s ease;
-	position: relative;
-	z-index: 2;
-}
-
-.pulsePointActive .dot {
-	transform: scale(1.4);
-	box-shadow:
-		0 0 0 3px #00c9a7,
-		0 0 12px rgba(0, 201, 167, 0.5);
-}
-
-.pulsePointInactive .dot {
-	background: rgba(0, 201, 167, 0.35);
-	box-shadow: 0 0 0 2px rgba(0, 201, 167, 0.35);
-}
-
-.pulsePointInactive .ring {
-	border-color: rgba(0, 201, 167, 0.3);
-}
-
-@keyframes ping {
-	0% {
-		transform: scale(1);
-		opacity: 0.65;
-	}
-	80% {
-		transform: scale(2.6);
-		opacity: 0;
-	}
-	100% {
-		transform: scale(2.6);
-		opacity: 0;
-	}
-}
 
 .contentArea {
 	padding: 36px 40px 56px;
