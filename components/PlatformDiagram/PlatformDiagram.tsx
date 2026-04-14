@@ -6,6 +6,7 @@ import styles from './PlatformDiagram.module.scss';
 import PulsePoint from '@/components/PulsePoint/PulsePoint';
 import TextHeader from '../TextHeader/TextHeader';
 import { USE_CASES } from '@/data/useCases';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const SCALE = 1.18;
 
@@ -87,60 +88,40 @@ export default function PlatformDiagram() {
 					))}
 				</div>
 			</div>
-			<div className={styles.contentArea}>
-				<div className={styles.navRow}>
+			<div className={styles.contentSection}>
+				<div className={styles.contentWrapper}>
 					<button
 						className={styles.arrowBtn}
 						onClick={() => switchTo(active - 1)}
 						aria-label='Previous use case'
 					>
-						<svg
-							viewBox='0 0 24 24'
-							fill='none'
-							strokeWidth='1.8'
-							strokeLinecap='round'
-							strokeLinejoin='round'
-						>
-							<polyline points='15 18 9 12 15 6' />
-						</svg>
+						<ChevronLeft size={16} strokeWidth={1.8} />
 					</button>
-					<div
-						className={[styles.contentInner, fading ? styles.fading : ''].join(
-							' '
-						)}
-					>
-						<h3 className={styles.useCaseLabel}>{current.label}</h3>
+					<div className={styles.content}>
+						<div className={[styles.contentInner, fading ? styles.fading : ''].join(' ')}>
+							<h3 className={styles.useCaseLabel}>{current.label}</h3>
+						</div>
+						<div className={[styles.contentInner, fading ? styles.fading : ''].join(' ')}>
+							<p className={styles.useCaseDesc}>{current.desc}</p>
+						</div>
+						<div className={[styles.contentInner, fading ? styles.fading : ''].join(' ')}>
+							<div className={styles.chipsRow}>
+								{current.chips.map((chip) => (
+									<span key={chip} className={styles.chip}>
+										<span className={styles.chipDot} />
+										{chip}
+									</span>
+								))}
+							</div>
+						</div>
 					</div>
 					<button
 						className={styles.arrowBtn}
 						onClick={() => switchTo(active + 1)}
 						aria-label='Next use case'
 					>
-						<svg
-							viewBox='0 0 24 24'
-							fill='none'
-							strokeWidth='1.8'
-							strokeLinecap='round'
-							strokeLinejoin='round'
-						>
-							<polyline points='9 18 15 12 9 6' />
-						</svg>
+						<ChevronRight size={16} strokeWidth={1.8} />
 					</button>
-				</div>
-				<div
-					className={[styles.contentInner, fading ? styles.fading : ''].join(
-						' '
-					)}
-				>
-					<p className={styles.useCaseDesc}>{current.desc}</p>
-					<div className={styles.chipsRow}>
-						{current.chips.map((chip) => (
-							<span key={chip} className={styles.chip}>
-								<span className={styles.chipDot} />
-								{chip}
-							</span>
-						))}
-					</div>
 				</div>
 				<div className={styles.pagination} role='tablist'>
 					{USE_CASES.map((uc, i) => (

@@ -8,7 +8,6 @@
 	--brand-caribbean-300: oklch(0.84 0.1608 173.06);
 
 	--heading-color: var(--black);
-	--heading-letter-spacing: 0.015em;
 	--text-color: var(--black);
 
 	--button-font-size: 0.875rem;
@@ -57,5 +56,10 @@ h3 {
 
 h2 {
 	font-size: clamp(3rem, 4.42vw + 1.96rem, 5.5rem);
-	letter-spacing: var(--heading-letter-spacing);
+	letter-spacing: 0.015em;
+}
+
+h3 {
+	font-size: clamp(1.5rem, 0.88vw + 1.29rem, 2rem);
+	letter-spacing: 0.02em;
 }
