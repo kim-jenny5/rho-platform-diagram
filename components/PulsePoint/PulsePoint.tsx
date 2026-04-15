@@ -2,21 +2,21 @@ import styles from './PulsePoint.module.scss';
 
 interface PulsePointProps {
 	id: string;
-	x: number;
-	y: number;
+	left: string;
+	top: string;
 	active: boolean;
 	onClick: () => void;
 	label: string;
 }
 
-export default function PulsePoint({ id, x, y, active, onClick, label }: PulsePointProps) {
+export default function PulsePoint({ id, left, top, active, onClick, label }: PulsePointProps) {
 	return (
 		<button
 			className={[
 				styles.pulsePoint,
 				active ? styles.pulsePointActive : styles.pulsePointInactive
 			].join(' ')}
-			style={{ left: `${x}%`, top: `${y}%` }}
+			style={{ left, top }}
 			onClick={onClick}
 			aria-label={label}
 		>

@@ -3,7 +3,8 @@
     "allow": [
       "Bash(npm install:*)",
       "Bash(pnpm add:*)",
-      "Bash(python3:*)"
+      "Bash(python3:*)",
+      "Bash(sips -g pixelWidth -g pixelHeight /Users/yunjeonk/Development/personal/rho-platform-diagram/public/images/mountain.png)"
     ]
   }
 }

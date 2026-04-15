@@ -28,14 +28,9 @@
 	align-items: center;
 	gap: 1.5rem;
 
-	@media (max-width: 768px) {
-		align-items: flex-start;
-	}
-
 	.content {
 		font-size: clamp(1rem, 0.8214rem + 0.5714vw, 1.25rem);
 		letter-spacing: -0.025em;
-		line-height: 1.6;
 		color: var(--text-color);
 		max-width: clamp(350px, 228.57px + 24.29vw, 520px);
 	}

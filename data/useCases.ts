@@ -12,28 +12,28 @@ export const USE_CASES: UseCase[] = [
 		label: 'Extend your runway',
 		desc: 'Earn yield on idle cash and keep more of your funding working between raises.',
 		chips: ['Checking Accounts', 'Savings Accounts', 'Treasury Accounts'],
-		dot: { x: 23, y: 80 }
+		dot: { x: 20, y: 80 }
 	},
 	{
 		id: 'spend',
 		label: 'Control spend early',
 		desc: 'Set limits and approval workflows before expenses scale with your growing team.',
 		chips: ['Rho Cards', 'Expense Management', 'Bill Pay'],
-		dot: { x: 38, y: 62 }
+		dot: { x: 70, y: 76 }
 	},
 	{
 		id: 'scale',
 		label: 'Scale finance operations',
 		desc: 'Automate reconciliation and transaction syncing so finance keeps pace with company growth.',
 		chips: ['Accounting Integrations', 'Bill Pay', 'Expense Management'],
-		dot: { x: 52, y: 28 }
+		dot: { x: 38, y: 62 }
 	},
 	{
 		id: 'standardize',
 		label: 'Standardize company spend',
 		desc: 'Create consistent workflows across teams while maintaining centralized oversight.',
 		chips: ['Rho Cards', 'Expense Management', 'Approval Workflows'],
-		dot: { x: 65, y: 57 }
+		dot: { x: 62, y: 48 }
 	},
 	{
 		id: 'consolidate',
@@ -45,6 +45,6 @@ export const USE_CASES: UseCase[] = [
 			'Bill Pay',
 			'Accounting Integrations'
 		],
-		dot: { x: 77, y: 76 }
+		dot: { x: 48, y: 24 }
 	}
 ];
