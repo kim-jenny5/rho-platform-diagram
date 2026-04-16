@@ -1,5 +1,6 @@
 export interface UseCase {
 	id: string;
+	order: number;
 	label: string;
 	desc: string;
 	chips: string[];
@@ -9,6 +10,7 @@ export interface UseCase {
 export const USE_CASES: UseCase[] = [
 	{
 		id: 'runway',
+		order: 1,
 		label: 'Extend your runway',
 		desc: 'Earn yield on idle cash and keep more of your funding working between raises.',
 		chips: ['Checking Accounts', 'Savings Accounts', 'Treasury Accounts'],
@@ -16,6 +18,7 @@ export const USE_CASES: UseCase[] = [
 	},
 	{
 		id: 'spend',
+		order: 2,
 		label: 'Control spend early',
 		desc: 'Set limits and approval workflows before expenses scale with your growing team.',
 		chips: ['Rho Cards', 'Expense Management', 'Bill Pay'],
@@ -23,6 +26,7 @@ export const USE_CASES: UseCase[] = [
 	},
 	{
 		id: 'scale',
+		order: 3,
 		label: 'Scale finance operations',
 		desc: 'Automate reconciliation and transaction syncing so finance keeps pace with company growth.',
 		chips: ['Accounting Integrations', 'Bill Pay', 'Expense Management'],
@@ -30,6 +34,7 @@ export const USE_CASES: UseCase[] = [
 	},
 	{
 		id: 'standardize',
+		order: 4,
 		label: 'Standardize company spend',
 		desc: 'Create consistent workflows across teams while maintaining centralized oversight.',
 		chips: ['Rho Cards', 'Expense Management', 'Approval Workflows'],
@@ -37,6 +42,7 @@ export const USE_CASES: UseCase[] = [
 	},
 	{
 		id: 'consolidate',
+		order: 5,
 		label: 'Consolidate your finance stack',
 		desc: 'Bring banking, cards, bill pay, and accounting workflows together in one platform.',
 		chips: [

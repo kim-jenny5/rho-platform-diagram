@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useCallback, useEffect } from 'react';
+import { useState, useRef, useCallback, useEffect, useMemo } from 'react';
 import Image from 'next/image';
 import styles from './PlatformDiagram.module.scss';
 import PulsePoint from '@/components/PulsePoint/PulsePoint';
@@ -158,6 +158,29 @@ export default function PlatformDiagram() {
 
 	const current = USE_CASES[active];
 
+	const pathData = useMemo(() => {
+		const { w, h } = containerSize;
+		if (w === 0 || h === 0) return '';
+		const sorted = [...USE_CASES].sort((a, b) => a.order - b.order);
+		const pts = sorted.map((uc) => {
+			const pos = imageToContainerPct(uc.dot.x, uc.dot.y, w, h);
+			return { x: (pos.left / 100) * w, y: (pos.top / 100) * h };
+		});
+		return pts.reduce((d, pt, i) => {
+			if (i === 0) return `M ${pt.x.toFixed(1)} ${pt.y.toFixed(1)}`;
+			const prev = pts[i - 1];
+			const mx = (prev.x + pt.x) / 2;
+			const my = (prev.y + pt.y) / 2;
+			const dx = pt.x - prev.x;
+			const dy = pt.y - prev.y;
+			const len = Math.sqrt(dx * dx + dy * dy);
+			const cf = len * 0.12;
+			const cpx = mx + (-dy / len) * cf;
+			const cpy = my + (dx / len) * cf;
+			return `${d} Q ${cpx.toFixed(1)} ${cpy.toFixed(1)} ${pt.x.toFixed(1)} ${pt.y.toFixed(1)}`;
+		}, '');
+	}, [containerSize]);
+
 	return (
 		<section className={styles.PlatformDiagram}>
 			<TextHeader />
@@ -173,6 +196,31 @@ export default function PlatformDiagram() {
 				</div>
 				<div className={styles.fadeBottom} aria-hidden='true' />
 				<div className={styles.pulseWrapper} ref={pulseWrapRef}>
+					{pathData && (
+						<svg
+							style={{
+								position: 'absolute',
+								inset: 0,
+								width: '100%',
+								height: '100%',
+								pointerEvents: 'none',
+								overflow: 'visible'
+							}}
+							viewBox={`0 0 ${containerSize.w} ${containerSize.h}`}
+							xmlns='http://www.w3.org/2000/svg'
+						>
+							<path
+								d={pathData}
+								fill='none'
+								stroke='var(--brand-caribbean-300)'
+								strokeWidth='1.5'
+								strokeOpacity='0.5'
+								strokeDasharray='6 8'
+								strokeLinecap='round'
+								strokeLinejoin='round'
+							/>
+						</svg>
+					)}
 					{USE_CASES.map((uc, i) => {
 						const pos = imageToContainerPct(
 							uc.dot.x,
