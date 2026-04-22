@@ -42,7 +42,7 @@ export default function TextHeader() {
 						Once you've opened your business banking accounts, get set up with
 						the rest of the essentials.
 					</p>
-					<Link href='/request-a-demo' className={styles.cta}>
+					<Link href='/' className={styles.cta}>
 						Get Started
 					</Link>
 				</div>
