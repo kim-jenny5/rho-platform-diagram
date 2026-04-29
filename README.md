@@ -1,36 +1,38 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# `PlatformDiagram` Redesign (Rho)
+A redesign exploration of Rho's `PlatformDiagram` component. The goal here was to make that progression clearer so users immediately understand how Rho scales with them over time.
 
-## Getting Started
+The component renders an interactive mountain illustration where each elevation maps to a use case, from extending runway as an early-stage startup to consolidating your entire finance stack at scale. Users navigate between stages via animated pulse points on the mountain, arrow controls, pagination dots, or (on mobile) a horizontal swipe carousel.
 
-First, run the development server:
+**Note:** This is a standalone design exploration, not a fork of Rho's production codebase. The component was rebuilt from scratch to explore how the progression narrative could be made clearer through interaction design.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Tech Stack
+- **Next.js** – React framework with App Router and use client components
+- **TypeScript** – type-safe component and data layer
+- **SCSS Modules** – scoped styling with CSS custom properties (OKLCH color space)
+- **Degular / Basier / Inter** – custom type stack for headings, body, and fallback
+- **`lucide-react`** – lightweight icon set
+- **`@portabletext/react`** – rich text rendering for the header block
+
+## Running Locally
+1. Clone the repository
+```
+git clone https://github.com/kim-jenny5/platform-diagram.git
+cd platform-diagram
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+npm install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+3. Start the development server
 
-## Learn More
+```
+npm run dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+The app will be running at `http://localhost:3000`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Note
+This is a standalone design exploration, not a fork of Rho's production codebase. The component was rebuilt from scratch to explore how the progression narrative could be made clearer through interaction design.
